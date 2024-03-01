@@ -1,4 +1,3 @@
-_verify(11)
-# Bricks = {}
-# Brick_generator(seq, Bricks, LEN)
-# compatible_SubBrick_pairs(s
+or key, value in temporary_dict.items():
+            if key not in bricks or bricks[key] > value:
+                bricks[key] = value

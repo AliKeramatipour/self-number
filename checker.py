@@ -19,22 +19,38 @@ def is_self_number(n):
 
 # Simple function to add to the substring dictionary
 # while preserving their first appearance
-def add_brick(bricks, word, first = -1, last = -1):
+def add_brick(bricks, word, add_rev = 1, first = -1, last = -1):
+    
     if first == -1:
-        first = last - len(bricks) + 1
-    last = first + len(bricks) - 1
+        first = last - len(word) + 1
+    print(f"Initial first {first} and last {last}")
+    last = first + len(word) - 1
     if word not in bricks or first < bricks[word]:
-        verify(word, first)
+        verify(word, first, id = 'add_actual_brick')
         bricks[word] = first
 
+    if not add_rev:
+        return
+    
     word = word[::-1]
     l = first + 1
     r = last
-    print(f"Initial first {first} and last {last}")
-    first = 2 ** l + l - r - 1
-    if word not in bricks or first < bricks[word]:
-        verify(word, first, id = 'add_brick_rev')
-        bricks[word] = first
+    newFirst = -1
+    # print(f"Initial first {first} and last {last}")
+    reverse_prefix = {134, 2097172, 87112285931760246646623899502532662132871}
+    for f2 in reverse_prefix:
+        start = f2 - first - len(word) + 1
+        # print(f"detecing start is {start}")
+        if start > 1 and (start < newFirst or newFirst == -1):
+            newFirst = start
+            print(f"WE ARE STARTING ON {f2}")
+            break
+    if l + 2 < log_2(newFirst) and 2 ** l + l - r - 1 < newFirst:
+        newFirst = 2 ** l + l - r - 1
+    if word not in bricks or newFirst < bricks[word]:
+        verify(word, newFirst, id = 'add_brick_rev')
+        bricks[word] = newFirst
+        print(f"WE ARE STARTING ON {newFirst}")
     print("END\n")
 
 # Generates all possible Bricks
@@ -43,7 +59,8 @@ def Brick_generator(seq, bricks, n):
     # adding all the bricks and their reverses to the dictionary
     l = 0
     while l < log(l + n + 1):
-        add_brick(bricks, word=tuple(seq[l:l + n - 1]), first=l)
+        add_brick(bricks, word=tuple(seq[l:l + n]), first=l, add_rev=0)
+        add_brick(bricks, word=tuple(seq[134 - l - n + 1:134 - l + 1]), add_rev=0, first=134 - l - n + 1)
         l += 1
     
 # Generates all possible sub-brick pairs that are matching
@@ -72,13 +89,22 @@ def merge_generator(seq, bricks, n):
     z_seq = seq[:n].copy() + [False]*n
     for i in range(n):
         sub_brick = (z_seq[-i:] if (i > 0) else []) + z_seq[:n-i]
+        print(len(sub_brick))
         # left-sided subbrick
         sub_brick = tuple(sub_brick[::-1])
+        temporary_dict = {}
         for word, start in bricks.items():
-            end = start + n - 1 + 2
-            new_word = [word[j] or sub_brick[j] for j in range(n)]
+            zero_lands_on = start + n - 1 - i
+            newN = zero_lands_on + 2
+            print(f"length is {len(word)} and range is {n}")
+            print(binary(word))
+            print(binary(sub_brick))
+            new_word = [(word[j] or sub_brick[j]) for j in range(n)]
             # new word ends on 2 ** end + end - 1
-            add_brick(bricks, new_word, last=2 ** end + end - 1)
+            add_brick(temporary_dict, tuple(new_word), last=2 ** newN + newN - 1 + i)
+        for key, value in temporary_dict.items():
+            if key not in bricks or bricks[key] > value:
+                bricks[key] = value
 
 # Converts a boolean tuple into a binary string            
 def binary(bool_tuple):
@@ -122,17 +148,16 @@ def mid_verify(n):
 
 # reversible prefixes
 def prefix_rev(n):
-    e = 2 ** n + 1 + n
     word = []
-    for i in range(e):
+    for i in range(n + 1):
         word.append(is_self_number(i))
-    print(word)
-    print(word[::-1])
+    print(binary(word))
+    print(binary(word[::-1]))
     print(word == word[::-1])
-    return
+    return word == word[::-1]
 
 # Basics
-LEN = 10
+LEN = 5
 SZ = 10000
 seq = [False] * SZ
 for m in range(0, SZ):
@@ -143,13 +168,30 @@ for m in range(0, SZ):
 # for i in range(3,100):
 #     mid_verify(i)
 
-reverser(0,20)
-prefix_rev(20)
+# building reversible prefixes IDs
+reversible_prefix = []
+prefix_id = 0
+for _ in range(3):
+    n = prefix_id + 2
+    prefix_id = 2 ** n + n - 1
+    reversible_prefix.append(prefix_id)
+
+# l = 10
+# n = 30
+# print(binary(seq[l:l + n]))
+# print(binary(seq[134 - l:134 - l - n:-1]))
+# if seq[134 - l:134 - l - n:-1] == seq[l:l + n]:
+#     print("true ranges are right")
+
+print(reversible_prefix)
 # mid_verify(11)
 Bricks = {}
-# Brick_generator(seq, Bricks, LEN)
-# compatible_SubBrick_pairs(seq, Bricks, LEN)
+Brick_generator(seq, Bricks, LEN)
 
+compatible_SubBrick_pairs(seq, Bricks, LEN)
+merge_generator(seq, Bricks, LEN)
+for brick,start in Bricks.items():
+    print(binary(brick), start)
 
 n = 21
 # print(is_self_number(20)) 
