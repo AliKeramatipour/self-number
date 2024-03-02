@@ -48,9 +48,7 @@ def add_brick(bricks, word, add_rev = 1, first = -1, last = -1):
             newFirst = start
             print(f"111WE ARE STARTING ON {f2}")
             break
-    print("fucking l", log_2(l))
     if newFirst == -1 or (l + 2 < log_2(newFirst) and 2 ** l + l - r - 1 < newFirst):
-        print("fucking l", log_2(l))
         newFirst = 2 ** l + l - r - 1
     if word not in bricks or newFirst < bricks[word]:
         if verify(word, newFirst, id = 'add_brick_rev'):

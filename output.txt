@@ -1,0 +1,92 @@
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+first l 6
+111WE ARE STARTING ON 2097172
+fucking l 6
+END
+
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+confirming
+5
+
+TRYINT TO MIX 01101 and 01101 starts at 15
+newN 0 21
+confirming
+first l 22
+111WE ARE STARTING ON 87112285931760246646623899502532662132871
+fucking l 22
+END
+
+
+TRYINT TO MIX 01101 and 10110 starts at 17
+newN 0 23
+confirming
+
+TRYINT TO MIX 01101 and 01011 starts at 128
+newN 0 134
+confirming
+first l 135
+111WE ARE STARTING ON 87112285931760246646623899502532662132871
+fucking l 135
+END
+
+
+TRYINT TO MIX 01101 and 11010 starts at 2097040
+newN 0 2097046
+
+TRYINT TO MIX 01101 and 10101 starts at 127
+newN 0 133
+confirming
+first l 134
+111WE ARE STARTING ON 87112285931760246646623899502532662132871
+fucking l 134
+END
+
+
+TRYINT TO MIX 01101 and 11111 starts at 7
+newN 0 13
+confirming
+
+TRYINT TO MIX 01101 and 11110 starts at 9
+newN 0 15
+
+TRYINT TO MIX 01101 and 01111 starts at 6
+newN 0 12
+confirming
+
+TRYINT TO MIX 01101 and 11011 starts at 16
+newN 0 22
+5
+
+TRYINT TO MIX 11010 and 01101 starts at 15
+newN 1 20
+confirming
+
+TRYINT TO MIX 11010 and 10110 starts at 17
+newN 1 22
+confirming
+first l 23
+111WE ARE STARTING ON 87112285931760246646623899502532662132871
+fucking l 23
+END
+
+
+TRYINT TO MIX 11010 and 01011 starts at 128
+newN 1 133
+confirming
+
+TRYINT TO MIX 11010 and 11010 starts at 2097040
+newN 1 2097045
+confirming
