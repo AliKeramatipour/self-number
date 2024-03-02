@@ -46,13 +46,16 @@ def merge_generator(seq, bricks, n):
     # if a Sub-Brick does not add something, it cannot add anything until the end
     z_seq = seq[:n].copy() + [False]*n
     for i in range(n):
-        sub_brick = (z_seq[-i:] if (i > 0) else []) + z_seq[:n-i]
+        sub_brick_r = (z_seq[-i:] if (i > 0) else []) + z_seq[:n-i]
         # left-sided subbrick
-        sub_brick = tuple(sub_brick[::-1])
+        sub_brick_l = tuple(sub_brick_r[::-1])
         temporary_set = set()
         for word in bricks:
-            new_word = [(word[j] or sub_brick[j]) for j in range(n)]
+            new_word = [(word[j] or sub_brick_r[j]) for j in range(n)]
             add_brick(temporary_set, tuple(new_word))
+            new_word = [(word[j] or sub_brick_r[j] or sub_brick_l[j]) for j in range(n)]
+            add_brick(temporary_set, tuple(new_word))
+
         for key in temporary_set:
             bricks.add(key)
 
@@ -65,19 +68,17 @@ def binary(bool_tuple):
 
 # Basics
 # 2 3 5 8 11 17 24 35 51 68 85 104 126 148 172
-LEN = 11
-SZ = 10000
-seq = [False] * SZ
-for m in range(0, SZ):
-    p = m + binary_sum(m)
-    if p < SZ:
-        seq[p] = True
+for LEN in range(1,30):
+    SZ = 10000
+    seq = [False] * SZ
+    for m in range(0, SZ):
+        p = m + binary_sum(m)
+        if p < SZ:
+            seq[p] = True
 
-Bricks = set()
-Brick_generator(seq, Bricks, LEN)
+    Bricks = set()
+    Brick_generator(seq, Bricks, LEN)
 
-compatible_SubBrick_pairs(seq, Bricks, LEN)
-merge_generator(seq, Bricks, LEN)
-print(len(Bricks))
-for brick in Bricks:
-    print(binary(brick))
+    compatible_SubBrick_pairs(seq, Bricks, LEN)
+    merge_generator(seq, Bricks, LEN)
+    print(LEN, len(Bricks))
