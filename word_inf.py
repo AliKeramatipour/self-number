@@ -18,6 +18,6 @@ for i in range(N - 1):
         print(i, i + 1)
 
 # print(mx)
-f_str = ''.join(map(str, f))
+f_str = ','.join(map(str, f))
 print(f[21])
 print(f_str)
