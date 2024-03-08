@@ -1,5 +1,3 @@
-from math import log
-
 def binary_sum(m):
     return sum(int(digit) for digit in bin(m)[2:])
 
@@ -77,7 +75,7 @@ def binary(bool_tuple):
 
 # Basics
 # 2 3 5 8 11 17 24 35 51 68 85 104 126 148 172
-for LEN in range(11,12):
+for LEN in range(1,20):
     SZ = 10000
     seq = [False] * SZ
     for m in range(0, SZ):
@@ -90,6 +88,6 @@ for LEN in range(11,12):
 
     compatible_SubBrick_pairs(seq, Bricks, LEN)
     merge_generator(seq, Bricks, LEN)
-    for key, val in Bricks.items():
-        print(f"{key} -- {val}")
+    # for key, val in Bricks.items():
+    #     print(f"{key} -- {val}")
     print(LEN, len(Bricks))
