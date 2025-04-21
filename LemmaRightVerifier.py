@@ -1,12 +1,11 @@
-# Check Lemma `lemmaLeft` first instances
+# Check Lemma `lemmaRight` first instances
 from Modules import *
 
 err = False
-for n in range(1,20):
+for n in range(1,15):
     fails = False
-    for i in range(n-1, 2**n + 1):
-        inv = 2 ** n + n - 1 - i
-        if is_self_number(i) != is_self_number(inv):
+    for i in range(n-1, 2**n - 2):
+        if is_self_number(2**n + 1 + i) != is_self_number(i):
             print(f"ERROR: for {n} in {i}")
             fails = True
             break
