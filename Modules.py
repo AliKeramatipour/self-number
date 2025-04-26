@@ -27,4 +27,23 @@ def Generate_Sequence(N):
         n = m + binary_sum(m)
         if n < N:
             f[n] = 1
-    return f
+    return ''.join(str(x) for x in f)
+
+
+def Generate_Sequence(l, r):
+    N = r - l + 1
+    f = [0] * N
+
+    start = max(0, l - log_2(l) * 2)
+
+    for m in range(start, r + 1):
+        n = m + binary_sum(m)
+        if l <= n <= r:
+            f[n - l] = 1
+
+    return ''.join(str(x) for x in f)
+
+def or_sequences(seq1, seq2):
+    if len(seq1) != len(seq2):
+        raise ValueError("Sequences must have the same length")
+    return ''.join('1' if a == '1' or b == '1' else '0' for a, b in zip(seq1, seq2))
