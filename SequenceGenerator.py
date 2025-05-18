@@ -1,6 +1,5 @@
 from Modules import *
 
-N = 2000
+N = 8
 f = Generate_Sequence(N)
-f_str = ','.join(map(str, f))
-print(f_str)
+print(f)

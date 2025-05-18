@@ -20,7 +20,7 @@ def is_self_number(n):
     return False
 
 # Generate the first N elements of the sequence
-def Generate_Sequence(N):
+def Generate_First_Elements_Sequence(N):
     f = [0] * N
 
     for m in range(0, N):
