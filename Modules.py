@@ -12,12 +12,12 @@ def is_self_number(n):
     if n < 0:
         raise ValueError("is_self_number is not defined for negative numbers")
     if n == 0:
-        return True
+        return False
     start = max(1, n - int(log_2(n)) - 10)
     for m in range(start, n):
         if m + binary_sum(m) == n:
-            return True
-    return False
+            return False
+    return True
 
 # Generate the first N elements of the sequence
 def Generate_First_Elements_Sequence(N):

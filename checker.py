@@ -1,21 +1,11 @@
 from math import log
+from Modules import *
 
 def binary_sum(m):
     return sum(int(digit) for digit in bin(m)[2:])
 
 def log_2(m):
     return len(bin(m)[2:])
-
-# Whether n is a self-number or not
-def is_self_number(n):
-    if n == 0:
-        return True
-    start = max(1, n - int(log_2(n)) - 10)
-    for m in range(start, n):
-        if m + binary_sum(m) == n:
-            # print(f"{m}: {bin(m)[2:]} -> generates {n}")
-            return True
-    return False
 
 # Simple function to add to the substring dictionary
 # while preserving their first appearance
