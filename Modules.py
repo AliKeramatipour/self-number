@@ -30,7 +30,12 @@ def Generate_First_Elements_Sequence(N):
     return ''.join(str(x) for x in f)
 
 
-def Generate_Sequence(l, r):
+def Generate_Sequence(l, r=None, flag=None):
+    # If r is None, interpret as Generate_Sequence(0, l)
+    if r is None:
+        r = l
+        l = 0
+    
     N = r - l + 1
     f = [0] * N
 
@@ -41,7 +46,13 @@ def Generate_Sequence(l, r):
         if l <= n <= r:
             f[n - l] = 1
 
-    return ''.join(str(x) for x in f)
+    sequence = ''.join(str(x) for x in f)
+    
+    if flag == 'DEC':
+        for i in range(N):
+            print(f"{l + i} → {sequence[i]}")
+    
+    return sequence
 
 def or_sequences(seq1, seq2):
     if len(seq1) != len(seq2):
